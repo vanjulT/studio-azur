@@ -25,7 +25,7 @@ export function formatDuration(minutes) {
 }
 
 export const statusStyles = {
-  booked: "bg-sea-100 text-sea-800",
+  booked: "bg-mist-100 text-mist-800",
   completed: "bg-emerald-100 text-emerald-800",
   cancelled: "bg-sand-200 text-ink/70",
   "no-show": "bg-terra-100 text-terra-700",

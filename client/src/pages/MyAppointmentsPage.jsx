@@ -16,7 +16,7 @@ function AppointmentRow({ appointment, onCancel, cancellingId, confirmingId, set
     <Card>
       <CardContent className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <p className="font-semibold text-sea-900">{service ? serviceText(service).name : t("mine.serviceRemoved")}</p>
+          <p className="font-semibold text-mist-900">{service ? serviceText(service).name : t("mine.serviceRemoved")}</p>
           <p className="text-sm text-ink/70">
             {slot ? `${formatDate(slot.date, lang)} ${t("book.at")} ${slot.startTime}` : t("mine.slotRemoved")}
             {service && ` · ${formatPrice(service.price)}`}
@@ -104,7 +104,7 @@ function MyAppointmentsPage() {
   return (
     <div className="mx-auto max-w-3xl space-y-8">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="wave-underline inline-block text-4xl text-sea-900">{t("mine.title")}</h1>
+        <h1 className="wave-underline inline-block text-4xl text-mist-900">{t("mine.title")}</h1>
         <Link to="/" className="text-sm font-medium text-terra-600 hover:underline">{t("mine.bookAnother")}</Link>
       </div>
 
@@ -116,7 +116,7 @@ function MyAppointmentsPage() {
       )}
 
       <section className="space-y-3">
-        <h2 className="text-2xl text-sea-800">{t("mine.upcoming")}</h2>
+        <h2 className="text-2xl text-mist-800">{t("mine.upcoming")}</h2>
         {upcoming.length === 0 ? (
           <p className="text-ink/70">
             {t("mine.noUpcoming")} <Link to="/" className="text-terra-600 hover:underline">{t("mine.findService")}</Link>
@@ -136,7 +136,7 @@ function MyAppointmentsPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-2xl text-sea-800">{t("mine.past")}</h2>
+        <h2 className="text-2xl text-mist-800">{t("mine.past")}</h2>
         {past.length === 0 ? (
           <p className="text-ink/70">{t("mine.noPast")}</p>
         ) : (

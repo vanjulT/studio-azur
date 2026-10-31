@@ -4,7 +4,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Riviera palette: warm sand, terracotta and Mediterranean sea blue */
+/* Riviera palette: warm sand, terracotta and soft warm grey ("mist") */
 @theme {
   --color-sand-50: #fdf9f3;
   --color-sand-100: #f8efe2;
@@ -15,14 +15,14 @@
   --color-terra-500: #d06d45;
   --color-terra-600: #b6552f;
   --color-terra-700: #924326;
-  --color-sea-50: #eef6f8;
-  --color-sea-100: #dcecf1;
-  --color-sea-300: #8fc1d0;
-  --color-sea-500: #2f8aa6;
-  --color-sea-600: #23708a;
-  --color-sea-700: #1c5a6f;
-  --color-sea-800: #163f4d;
-  --color-sea-900: #0f2b35;
+  --color-mist-50: #f5f4f2;
+  --color-mist-100: #e9e6e2;
+  --color-mist-300: #bbb5ae;
+  --color-mist-500: #7d766f;
+  --color-mist-600: #635d58;
+  --color-mist-700: #4b4642;
+  --color-mist-800: #38342f;
+  --color-mist-900: #262320;
   --color-ink: #2b211c;
 }
 
@@ -64,7 +64,7 @@
   --card-foreground: #2b211c;
   --popover: #ffffff;
   --popover-foreground: #2b211c;
-  --primary: #1c5a6f;
+  --primary: #4b4642;
   --primary-foreground: #ffffff;
   --secondary: #f8efe2;
   --secondary-foreground: #2b211c;
@@ -75,7 +75,7 @@
   --destructive: #c2410c;
   --border: #efdcc2;
   --input: #e2c29b;
-  --ring: #2f8aa6;
+  --ring: #7d766f;
   --radius: 0.9rem;
 }
 
@@ -107,7 +107,7 @@ body::before {
   z-index: -1;
   background:
     radial-gradient(45rem 30rem at 100% 0%, rgb(251 228 216 / 0.7), transparent 60%),
-    radial-gradient(40rem 30rem at 0% 100%, rgb(220 236 241 / 0.8), transparent 60%);
+    radial-gradient(40rem 30rem at 0% 100%, rgb(233 230 226 / 0.9), transparent 60%);
 }
 
 [data-slot="card"] {
@@ -116,7 +116,7 @@ body::before {
 
 /* photo with a gentle dark fade, so white text stays readable */
 .photo-fade {
-  background-image: linear-gradient(180deg, rgb(15 43 53 / 0.15), rgb(15 43 53 / 0.75)), var(--photo);
+  background-image: linear-gradient(180deg, rgb(38 35 32 / 0.15), rgb(38 35 32 / 0.75)), var(--photo);
   background-size: cover;
   background-position: center;
 }

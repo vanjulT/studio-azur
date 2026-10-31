@@ -10,8 +10,8 @@ import { servicePhoto } from "@/lib/images"
 
 function choiceClass(active) {
   return active
-    ? "border-sea-700 bg-sea-700 text-white shadow-md"
-    : "border-sand-200 bg-white text-ink hover:border-sea-300 hover:bg-sea-50"
+    ? "border-mist-700 bg-mist-700 text-white shadow-md"
+    : "border-sand-200 bg-white text-ink hover:border-mist-300 hover:bg-mist-50"
 }
 
 function BookPage() {
@@ -90,7 +90,7 @@ function BookPage() {
     return (
       <div className="space-y-4 text-center">
         <p className="text-terra-700">{error || t("book.notFound")}</p>
-        <Link to="/" className="text-sea-700 hover:underline">{t("common.back")}</Link>
+        <Link to="/" className="text-mist-700 hover:underline">{t("common.back")}</Link>
       </div>
     )
   }
@@ -99,7 +99,7 @@ function BookPage() {
 
   return (
     <div className="mx-auto max-w-4xl space-y-6">
-      <Link to="/" className="text-sm font-medium text-sea-700 hover:underline">{t("common.back")}</Link>
+      <Link to="/" className="text-sm font-medium text-mist-700 hover:underline">{t("common.back")}</Link>
 
       <div className="grid overflow-hidden rounded-3xl border border-sand-200 bg-white shadow-[0_24px_60px_-30px_rgb(43_33_28/0.45)] md:grid-cols-[2fr_3fr]">
         {/* Summary with photo */}
@@ -110,16 +110,16 @@ function BookPage() {
             className="aspect-[4/3] w-full object-cover md:aspect-auto md:h-64"
           />
           <div className="flex flex-1 flex-col gap-3 bg-sand-50 p-6">
-            <h1 className="text-3xl text-sea-900">{text.name}</h1>
+            <h1 className="text-3xl text-mist-900">{text.name}</h1>
             <p className="text-sm text-ink/70">{text.description}</p>
             <div className="flex gap-2 text-sm">
               <span className="rounded-full bg-white px-3 py-1 text-ink/80">⏱ {formatDuration(service.durationMinutes)}</span>
               <span className="rounded-full bg-terra-100 px-3 py-1 font-semibold text-terra-700">{formatPrice(service.price)}</span>
             </div>
             {selectedSlot && (
-              <div className="mt-auto rounded-2xl border border-sea-100 bg-sea-50 p-4 text-sm">
+              <div className="mt-auto rounded-2xl border border-mist-100 bg-mist-50 p-4 text-sm">
                 <p className="text-ink/60">{t("book.yourChoice")}</p>
-                <p className="font-semibold text-sea-800">
+                <p className="font-semibold text-mist-800">
                   {formatDate(selectedSlot.date, lang)} {t("book.at")} {selectedSlot.startTime}
                 </p>
               </div>
@@ -134,7 +134,7 @@ function BookPage() {
           ) : (
             <>
               <div className="space-y-3">
-                <Label className="text-base font-semibold text-sea-900">{t("book.step1")}</Label>
+                <Label className="text-base font-semibold text-mist-900">{t("book.step1")}</Label>
                 <div className="flex gap-2 overflow-x-auto pb-2">
                   {dates.map((date) => {
                     const [weekday, day, month] = formatDate(date, lang).split(" ")
@@ -158,7 +158,7 @@ function BookPage() {
               </div>
 
               <div className="space-y-3">
-                <Label className="text-base font-semibold text-sea-900">{t("book.step2")}</Label>
+                <Label className="text-base font-semibold text-mist-900">{t("book.step2")}</Label>
                 <div className="grid grid-cols-3 gap-2 sm:grid-cols-4">
                   {timesForDay.map((slot) => (
                     <button
@@ -175,7 +175,7 @@ function BookPage() {
               </div>
 
               <div className="space-y-3">
-                <Label htmlFor="notes" className="text-base font-semibold text-sea-900">
+                <Label htmlFor="notes" className="text-base font-semibold text-mist-900">
                   {t("book.step3")} <span className="font-normal text-ink/50">{t("book.optional")}</span>
                 </Label>
                 <Textarea

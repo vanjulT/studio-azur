@@ -18,7 +18,7 @@ function AuthShell({ title, subtitle, children }) {
       </div>
 
       <div className="p-6 sm:p-10">
-        <h1 className="text-3xl text-sea-900">{title}</h1>
+        <h1 className="text-3xl text-mist-900">{title}</h1>
         <p className="mt-1.5 text-ink/70">{subtitle}</p>
         <div className="mt-8">{children}</div>
       </div>

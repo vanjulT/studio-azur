@@ -136,7 +136,7 @@ function AdminServicesPage() {
       <div className="grid gap-6 lg:grid-cols-[1fr_1.4fr] lg:items-start">
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4 rounded-2xl border border-sand-200 bg-white p-5 lg:sticky lg:top-24">
-          <h2 className="text-2xl text-sea-900">{editingId ? t("adminSvc.edit") : t("adminSvc.new")}</h2>
+          <h2 className="text-2xl text-mist-900">{editingId ? t("adminSvc.edit") : t("adminSvc.new")}</h2>
 
           <div className="space-y-1.5">
             <Label htmlFor="svc-name">{t("adminSvc.name")}</Label>
@@ -193,7 +193,7 @@ function AdminServicesPage() {
               type="checkbox"
               checked={form.isActive}
               onChange={(e) => updateField("isActive", e.target.checked)}
-              className="h-4 w-4 accent-sea-700"
+              className="h-4 w-4 accent-mist-700"
             />
             {t("adminSvc.active")}
           </label>
@@ -221,7 +221,7 @@ function AdminServicesPage() {
               <div
                 key={service._id}
                 className={`flex flex-wrap items-center gap-4 rounded-2xl border bg-white p-3 pr-4 ${
-                  editingId === service._id ? "border-sea-500 ring-2 ring-sea-100" : "border-sand-200"
+                  editingId === service._id ? "border-mist-500 ring-2 ring-mist-100" : "border-sand-200"
                 } ${service.isActive ? "" : "opacity-60"}`}
               >
                 <img
@@ -231,7 +231,7 @@ function AdminServicesPage() {
                   loading="lazy"
                 />
                 <div className="min-w-0 flex-1">
-                  <p className="font-semibold text-sea-900">
+                  <p className="font-semibold text-mist-900">
                     {service.name}{" "}
                     <span
                       className={`ml-1 rounded-full px-2 py-0.5 text-xs font-medium ${

@@ -92,7 +92,7 @@ function AdminAppointmentsPage() {
   return (
     <div className="space-y-6">
       <AdminHeader title={t("adminAppt.title")} subtitle={t("adminAppt.subtitle")}>
-        <span className="rounded-full bg-sea-100 px-3 py-1 text-sm font-medium text-sea-800">
+        <span className="rounded-full bg-mist-100 px-3 py-1 text-sm font-medium text-mist-800">
           {t("adminAppt.total", { count: pagination.total })}
         </span>
       </AdminHeader>
@@ -166,7 +166,7 @@ function AdminAppointmentsPage() {
                 key={a._id}
                 className="grid gap-2 px-5 py-4 md:grid-cols-[1.4fr_1.6fr_1.2fr_0.8fr_1.6fr] md:items-center md:gap-3"
               >
-                <span className="font-medium text-sea-900">
+                <span className="font-medium text-mist-900">
                   {a.slot ? `${formatDate(a.slot.date, lang)} · ${a.slot.startTime}` : "—"}
                 </span>
                 <span className="text-sm">

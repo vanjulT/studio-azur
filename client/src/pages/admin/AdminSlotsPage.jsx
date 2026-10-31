@@ -122,7 +122,7 @@ function AdminSlotsPage() {
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Existing slots */}
         <section className="space-y-4 rounded-2xl border border-sand-200 bg-white p-5">
-          <h2 className="text-2xl text-sea-900">
+          <h2 className="text-2xl text-mist-900">
             {t("adminSlots.existing")}
             {date && <span className="block text-base font-normal text-ink/60">{formatDate(date, lang)}</span>}
           </h2>
@@ -145,7 +145,7 @@ function AdminSlotsPage() {
                   }`}
                 >
                   <span>
-                    <span className="block font-semibold text-sea-900">{slot.startTime}</span>
+                    <span className="block font-semibold text-mist-900">{slot.startTime}</span>
                     <span className={`text-xs ${slot.isBooked ? "text-terra-700" : "text-emerald-700"}`}>
                       {slot.isBooked ? t("adminSlots.booked") : t("adminSlots.free")}
                     </span>
@@ -169,7 +169,7 @@ function AdminSlotsPage() {
 
         {/* Add new times */}
         <section className="space-y-4 rounded-2xl border border-sand-200 bg-white p-5">
-          <h2 className="text-2xl text-sea-900">{t("adminSlots.add")}</h2>
+          <h2 className="text-2xl text-mist-900">{t("adminSlots.add")}</h2>
           <p className="text-sm text-ink/70">{t("adminSlots.quick")}</p>
 
           <div className="grid grid-cols-4 gap-2">
@@ -185,8 +185,8 @@ function AdminSlotsPage() {
                   aria-pressed={isSelected}
                   className={`rounded-xl border px-2 py-2 text-sm font-semibold transition-all disabled:cursor-not-allowed disabled:opacity-35 ${
                     isSelected
-                      ? "border-sea-700 bg-sea-700 text-white"
-                      : "border-sand-200 bg-white hover:border-sea-300 hover:bg-sea-50"
+                      ? "border-mist-700 bg-mist-700 text-white"
+                      : "border-sand-200 bg-white hover:border-mist-300 hover:bg-mist-50"
                   }`}
                 >
                   {time}

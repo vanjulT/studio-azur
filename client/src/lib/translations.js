@@ -14,7 +14,7 @@ export const translations = {
     "nav.admin": "Admin",
 
     // footer
-    "footer.hours": "Mon–Sat 9:00–18:00 · Photos from Unsplash",
+    "footer.hours": "Mon–Sat 9:00–18:00",
 
     // common
     "common.loading": "Loading…",
@@ -177,7 +177,7 @@ export const translations = {
     "nav.hi": "Bonjour, {name} 👋",
     "nav.admin": "Admin",
 
-    "footer.hours": "Lun–Sam 9h00–18h00 · Photos Unsplash",
+    "footer.hours": "Lun–Sam 9h00–18h00",
 
     "common.loading": "Chargement…",
     "common.back": "← Retour aux prestations",

@@ -86,7 +86,7 @@ function ServicesPage() {
         {perks.map((perk) => (
           <div key={perk.title} className="rounded-2xl border border-sand-200 bg-white/80 p-5">
             <p className="text-2xl" aria-hidden="true">{perk.icon}</p>
-            <p className="mt-2 font-semibold text-sea-800">{t(perk.title)}</p>
+            <p className="mt-2 font-semibold text-mist-800">{t(perk.title)}</p>
             <p className="text-sm text-ink/70">{t(perk.text)}</p>
           </div>
         ))}
@@ -96,7 +96,7 @@ function ServicesPage() {
       <section id="services" className="scroll-mt-24 space-y-6">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <h2 className="wave-underline inline-block text-3xl text-sea-900">{t("home.servicesTitle")}</h2>
+            <h2 className="wave-underline inline-block text-3xl text-mist-900">{t("home.servicesTitle")}</h2>
             <p className="mt-2 text-ink/70">{t("home.servicesText")}</p>
           </div>
           <Input
@@ -142,7 +142,7 @@ function ServicesPage() {
                 </div>
                 <div className="flex flex-1 flex-col p-5">
                   <div className="flex items-start justify-between gap-3">
-                    <h3 className="text-xl text-sea-900">{text.name}</h3>
+                    <h3 className="text-xl text-mist-900">{text.name}</h3>
                     <span className="shrink-0 rounded-full bg-terra-100 px-2.5 py-0.5 text-sm font-semibold text-terra-700">
                       {formatPrice(service.price)}
                     </span>

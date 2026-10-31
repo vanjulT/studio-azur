@@ -15,7 +15,7 @@ function Layout() {
       <footer className="border-t border-sand-200 bg-sand-100/60">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2 px-4 py-6 text-sm text-ink/70">
           <p>
-            <span className="font-display font-semibold text-sea-800">Studio Azur</span> · 12 Rue de France, 06000 Nice
+            <span className="font-display font-semibold text-mist-800">Studio Azur</span> · 12 Rue de France, 06000 Nice
           </p>
           <p>{t("footer.hours")}</p>
         </div>
