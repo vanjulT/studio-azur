@@ -1,0 +1,265 @@
+{
+  "info": {
+    "name": "Studio Azur API",
+    "description": "Appointment booking API. Run 'Auth' logins first: they save the tokens automatically.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5001/api" },
+    { "key": "userToken", "value": "" },
+    { "key": "adminToken", "value": "" },
+    { "key": "serviceId", "value": "" },
+    { "key": "slotId", "value": "" },
+    { "key": "appointmentId", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "request": { "method": "GET", "url": "{{baseUrl}}/health" }
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register new user (201)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/register",
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"New Customer\",\n  \"email\": \"new{{$randomInt}}@studioazur.fr\",\n  \"password\": \"password123\"\n}" }
+          }
+        },
+        {
+          "name": "Register with role admin (ignored, still user)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/register",
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Sneaky Hacker\",\n  \"email\": \"hacker{{$randomInt}}@studioazur.fr\",\n  \"password\": \"password123\",\n  \"role\": \"admin\"\n}" }
+          }
+        },
+        {
+          "name": "Register invalid data (400)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/register",
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"A\",\n  \"email\": \"not-an-email\",\n  \"password\": \"123\"\n}" }
+          }
+        },
+        {
+          "name": "Login as user (saves userToken)",
+          "event": [{ "listen": "test", "script": { "exec": ["if (pm.response.code === 200) pm.collectionVariables.set('userToken', pm.response.json().token);"] } }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/login",
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"user@studioazur.fr\",\n  \"password\": \"User1234!\"\n}" }
+          }
+        },
+        {
+          "name": "Login as admin (saves adminToken)",
+          "event": [{ "listen": "test", "script": { "exec": ["if (pm.response.code === 200) pm.collectionVariables.set('adminToken', pm.response.json().token);"] } }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/login",
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"admin@studioazur.fr\",\n  \"password\": \"Admin1234!\"\n}" }
+          }
+        },
+        {
+          "name": "Login wrong password (401)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/auth/login",
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"user@studioazur.fr\",\n  \"password\": \"wrongpass\"\n}" }
+          }
+        },
+        {
+          "name": "Me (as user)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{userToken}}" }],
+            "url": "{{baseUrl}}/auth/me"
+          }
+        },
+        {
+          "name": "Me without token (401)",
+          "request": { "method": "GET", "url": "{{baseUrl}}/auth/me" }
+        }
+      ]
+    },
+    {
+      "name": "Services",
+      "item": [
+        {
+          "name": "List services (public, saves serviceId)",
+          "event": [{ "listen": "test", "script": { "exec": ["const s = pm.response.json().services;", "if (s && s.length) pm.collectionVariables.set('serviceId', s[0]._id);"] } }],
+          "request": { "method": "GET", "url": "{{baseUrl}}/services?page=1&limit=10" }
+        },
+        {
+          "name": "Search services",
+          "request": { "method": "GET", "url": "{{baseUrl}}/services?search=cut" }
+        },
+        {
+          "name": "Create service as user (403)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{userToken}}" }
+            ],
+            "url": "{{baseUrl}}/services",
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Hack\",\n  \"durationMinutes\": 30,\n  \"price\": 1\n}" }
+          }
+        },
+        {
+          "name": "Create service without token (401)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/services",
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Hack\",\n  \"durationMinutes\": 30,\n  \"price\": 1\n}" }
+          }
+        },
+        {
+          "name": "Create service as admin (201)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "url": "{{baseUrl}}/services",
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Hair Treatment {{$randomInt}}\",\n  \"description\": \"Deep care mask.\",\n  \"durationMinutes\": 45,\n  \"price\": 35\n}" }
+          }
+        },
+        {
+          "name": "All services incl. inactive (admin)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": "{{baseUrl}}/services/all"
+          }
+        },
+        {
+          "name": "Update service price (admin)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "url": "{{baseUrl}}/services/{{serviceId}}",
+            "body": { "mode": "raw", "raw": "{\n  \"price\": 16\n}" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Slots",
+      "item": [
+        {
+          "name": "Free slots (public, saves slotId)",
+          "event": [{ "listen": "test", "script": { "exec": ["const s = pm.response.json().slots;", "if (s && s.length) pm.collectionVariables.set('slotId', s[0]._id);"] } }],
+          "request": { "method": "GET", "url": "{{baseUrl}}/slots" }
+        },
+        {
+          "name": "All slots incl. booked (admin)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": "{{baseUrl}}/slots/all"
+          }
+        },
+        {
+          "name": "Create slots for a day (admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "url": "{{baseUrl}}/slots",
+            "body": { "mode": "raw", "raw": "{\n  \"date\": \"2026-12-01\",\n  \"times\": [\"09:00\", \"10:00\", \"11:00\"]\n}" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Appointments",
+      "item": [
+        {
+          "name": "Book appointment as user (201, saves appointmentId)",
+          "event": [{ "listen": "test", "script": { "exec": ["if (pm.response.code === 201) pm.collectionVariables.set('appointmentId', pm.response.json().appointment._id);"] } }],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{userToken}}" }
+            ],
+            "url": "{{baseUrl}}/appointments",
+            "body": { "mode": "raw", "raw": "{\n  \"serviceId\": \"{{serviceId}}\",\n  \"slotId\": \"{{slotId}}\",\n  \"notes\": \"First visit\"\n}" }
+          }
+        },
+        {
+          "name": "Book same slot again (409)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "url": "{{baseUrl}}/appointments",
+            "body": { "mode": "raw", "raw": "{\n  \"serviceId\": \"{{serviceId}}\",\n  \"slotId\": \"{{slotId}}\"\n}" }
+          }
+        },
+        {
+          "name": "My appointments (user)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{userToken}}" }],
+            "url": "{{baseUrl}}/appointments/mine"
+          }
+        },
+        {
+          "name": "All appointments as user (403)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{userToken}}" }],
+            "url": "{{baseUrl}}/appointments"
+          }
+        },
+        {
+          "name": "All appointments filtered (admin)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": "{{baseUrl}}/appointments?status=booked&page=1&limit=10&search=claire"
+          }
+        },
+        {
+          "name": "Mark completed (admin)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "url": "{{baseUrl}}/appointments/{{appointmentId}}/status",
+            "body": { "mode": "raw", "raw": "{\n  \"status\": \"completed\"\n}" }
+          }
+        },
+        {
+          "name": "Cancel my appointment (user)",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Authorization", "value": "Bearer {{userToken}}" }],
+            "url": "{{baseUrl}}/appointments/{{appointmentId}}/cancel"
+          }
+        }
+      ]
+    }
+  ]
+}
