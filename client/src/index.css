@@ -1,0 +1,152 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Riviera palette: warm sand, terracotta and Mediterranean sea blue */
+@theme {
+  --color-sand-50: #fdf9f3;
+  --color-sand-100: #f8efe2;
+  --color-sand-200: #efdcc2;
+  --color-sand-300: #e2c29b;
+  --color-terra-100: #fbe4d8;
+  --color-terra-400: #e08a63;
+  --color-terra-500: #d06d45;
+  --color-terra-600: #b6552f;
+  --color-terra-700: #924326;
+  --color-sea-50: #eef6f8;
+  --color-sea-100: #dcecf1;
+  --color-sea-300: #8fc1d0;
+  --color-sea-500: #2f8aa6;
+  --color-sea-600: #23708a;
+  --color-sea-700: #1c5a6f;
+  --color-sea-800: #163f4d;
+  --color-sea-900: #0f2b35;
+  --color-ink: #2b211c;
+}
+
+@theme inline {
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Fraunces", Georgia, serif;
+  --font-display: "Fraunces", Georgia, serif;
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  --background: #fdf9f3;
+  --foreground: #2b211c;
+  --card: #ffffff;
+  --card-foreground: #2b211c;
+  --popover: #ffffff;
+  --popover-foreground: #2b211c;
+  --primary: #1c5a6f;
+  --primary-foreground: #ffffff;
+  --secondary: #f8efe2;
+  --secondary-foreground: #2b211c;
+  --muted: #f8efe2;
+  --muted-foreground: #6b5d54;
+  --accent: #fbe4d8;
+  --accent-foreground: #2b211c;
+  --destructive: #c2410c;
+  --border: #efdcc2;
+  --input: #e2c29b;
+  --ring: #2f8aa6;
+  --radius: 0.9rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  [data-slot="card-title"] {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.015em;
+  }
+}
+
+/* soft paper texture: two warm glows behind the whole app */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(45rem 30rem at 100% 0%, rgb(251 228 216 / 0.7), transparent 60%),
+    radial-gradient(40rem 30rem at 0% 100%, rgb(220 236 241 / 0.8), transparent 60%);
+}
+
+[data-slot="card"] {
+  box-shadow: 0 1px 2px rgb(43 33 28 / 0.04), 0 12px 32px -18px rgb(43 33 28 / 0.25);
+}
+
+/* photo with a gentle dark fade, so white text stays readable */
+.photo-fade {
+  background-image: linear-gradient(180deg, rgb(15 43 53 / 0.15), rgb(15 43 53 / 0.75)), var(--photo);
+  background-size: cover;
+  background-position: center;
+}
+
+/* small wave under headings */
+.wave-underline {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12'%3E%3Cpath d='M2 8c12-6 22-6 34 0s22 6 34 0 22-6 34 0 10 4 14 2' fill='none' stroke='%23e08a63' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 0.35em;
+  padding-bottom: 0.3em;
+}
+
+.fade-up {
+  animation: fade-up 0.5s ease-out both;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-up {
+    animation: none;
+  }
+}
