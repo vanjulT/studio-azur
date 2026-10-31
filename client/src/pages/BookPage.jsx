@@ -103,7 +103,7 @@ function BookPage() {
 
       <div className="grid overflow-hidden rounded-3xl border border-sand-200 bg-white shadow-[0_24px_60px_-30px_rgb(43_33_28/0.45)] md:grid-cols-[2fr_3fr]">
         {/* Summary with photo */}
-        <aside className="flex flex-col">
+        <aside className="flex min-w-0 flex-col">
           <img
             src={servicePhoto(service.name, 800)}
             alt={text.name}
@@ -128,7 +128,7 @@ function BookPage() {
         </aside>
 
         {/* Steps */}
-        <section className="space-y-7 p-6 sm:p-8">
+        <section className="min-w-0 space-y-7 p-6 sm:p-8">
           {dates.length === 0 ? (
             <p className="rounded-2xl bg-sand-100 p-6 text-ink/70">{t("book.noSlots")}</p>
           ) : (
@@ -148,9 +148,9 @@ function BookPage() {
                         }}
                         className={`flex w-16 shrink-0 flex-col items-center rounded-2xl border py-2 transition-all ${choiceClass(date === selectedDate)}`}
                       >
-                        <span className="text-xs uppercase opacity-80">{weekday}</span>
+                        <span className="text-xs uppercase opacity-80">{weekday.replace(/[,.]/g, "")}</span>
                         <span className="text-xl font-semibold">{day}</span>
-                        <span className="text-xs opacity-80">{month}</span>
+                        <span className="text-xs opacity-80">{month.replace(/[,.]/g, "")}</span>
                       </button>
                     )
                   })}
